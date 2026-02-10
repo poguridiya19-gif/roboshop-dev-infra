@@ -7,13 +7,13 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "remote-state-poguri-dev"
+    bucket = "remote-state-86s-dev"
     key = "roboshop-dev-bastion"
     region = "us-east-1"
     use_lockfile = true
     encrypt =  true
   }
-  }
+}
 
 
 provider "aws" {

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 growing the /home volume for terraform purpose
 growpart /dev/nvme0n1 4
 lvextend -L +30G /dev/mapper/RootVG-homeVol
@@ -10,6 +9,7 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashi
 sudo yum -y install terraform
 
 sudo lvreduce -r -L 6G /dev/mapper/RootVG-rootVol
+
 
 # creating databases
 cd /home/ec2-user
