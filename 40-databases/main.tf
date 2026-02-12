@@ -58,6 +58,7 @@ resource "terraform_data" "redis" {
     password = "DevOps321"
     host     = aws_instance.redis.private_ip
   }
+  # terraform copies this file to mongodb server
   provisioner "file" {
     source      = "bootstrap.sh"
     destination = "/tmp/bootstrap.sh"
@@ -93,6 +94,7 @@ resource "terraform_data" "rabbitmq" {
     password = "DevOps321"
     host     = aws_instance.rabbitmq.private_ip
   }
+  # terraform copies this file to mongodb server
   provisioner "file" {
     source      = "bootstrap.sh"
     destination = "/tmp/bootstrap.sh"
