@@ -22,25 +22,26 @@ resource "terraform_data" "mongodb" {
     host = aws_instance.mongodb.private_ip
   }
   # terraform copies this file to mongodb server
-  provisioner "file" {
-    source = "bootstrap.sh"
-    destination = "/tmp/bootstrap.sh"
-  }
+  # provisioner "file" {
+  #   source = "bootstrap.sh"
+  #   destination = "/tmp/bootstrap.sh"
+  # }
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/bootstrap.sh" ,
-      "sudo sh /tmp/bootstrap.sh"
+      "hello world"
+      # "chmod +x /tmp/bootstrap.sh" ,
+      # "sudo sh /tmp/bootstrap.sh"
     ]
   }
 }
 
-resource "aws_route53_record" "mongodb" {
-  zone_id = var.zone_id
-  name    = "mongodb-${var.environment}.${var.domain_name}" # mongodb-dev.poguri.fun
-  type    = "A"
-  ttl     = 1
-  records = [aws_instance.mongodb.private_ip]
-}
+# resource "aws_route53_record" "mongodb" {
+#   zone_id = var.zone_id
+#   name    = "mongodb-${var.environment}.${var.domain_name}" # mongodb-dev.poguri.fun
+#   type    = "A"
+#   ttl     = 1
+#   records = [aws_instance.mongodb.private_ip]
+# }
 
 
 
