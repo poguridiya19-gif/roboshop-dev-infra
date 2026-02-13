@@ -27,8 +27,8 @@ resource "terraform_data" "catalogue" {
   }
   # terraform copies this file to catalogue server
   provisioner "file" {
-    source      = "bootstrap.sh"
-    destination = "/tmp/bootstrap.sh"
+    source      = "catalogue.sh"
+    destination = "/tmp/catalogue.sh"
   }
   provisioner "remote-exec" {
     inline = [
