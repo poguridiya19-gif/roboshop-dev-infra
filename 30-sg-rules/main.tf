@@ -63,7 +63,7 @@ resource "aws_security_group_rule" "catalogue_bastion" {
 }
 
 # mongodb accepting connections from catalogue
-resource "aws_security_group_rule" "catalogue_bastion" {
+resource "aws_security_group_rule" "catalogue_mongodb" {
   type                     = "ingress"
   security_group_id        = local.mongodb_sg_id
   source_security_group_id = local.catalogue_sg_id
