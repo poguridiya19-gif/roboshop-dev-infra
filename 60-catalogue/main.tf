@@ -55,3 +55,11 @@ resource "aws_ami_from_instance" "catalogue" {
     }
   )
 }
+# create target group
+resource "aws_lb_target_group" "catalogue"{
+
+}
+# create launch template
+# create auto scaling group
+# create auto scaling policy
+# create listener rule
