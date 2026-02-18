@@ -21,5 +21,7 @@ variable "sg_names" {
         # backened load balancer
         "backend_alb"
 
+        "openvpn"
+
     ]
 }
