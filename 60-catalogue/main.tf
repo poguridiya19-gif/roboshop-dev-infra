@@ -44,6 +44,7 @@ resource "aws_ec2_instance_state" "catalogue" {
   state       = "stopped"
   depends_on  = [terraform_data.catalogue]
 }
+
 resource "aws_ami_from_instance" "catalogue" {
   name               = "${local.common_name_suffix}-catalogue-ami"
   source_instance_id = aws_instance.catalogue.id
@@ -55,6 +56,7 @@ resource "aws_ami_from_instance" "catalogue" {
     }
   )
 }
+
 # create target group
 resource "aws_lb_target_group" "catalogue"{
   name = "${local.common_name_suffix}-catalogue"
@@ -74,11 +76,13 @@ resource "aws_lb_target_group" "catalogue"{
     unhealthy_threshold = 2
   }
 }
+
 # create launch template
 resource "aws_launch_template" "catalogue"{
   name = "${local.common_name_suffix}-catalogue"
   image_id = aws_ami_from_instance.catalogue.id
-  # instance_initiated_shutdown_behaviour = "terminate"
+
+  instance_initiated_shutdown_behavior = "terminate"
   instance_type = "t3.micro"
 
   vpc_security_group_ids = [local.catalogue_sg_id]
@@ -158,6 +162,7 @@ resource "aws_autoscaling_group" "catalogue" {
     delete = "15m"
   }
 }
+
 # create auto scaling policy
 resource "aws_autoscaling_policy" "catalogue" {
   autoscaling_group_name = aws_autoscaling_group.catalogue.name
@@ -171,6 +176,7 @@ resource "aws_autoscaling_policy" "catalogue" {
     target_value = 75.0
   }
 }
+
 # create listener rule
 resource "aws_lb_listener_rule" "catalogue" {
   listener_arn = local.backend_alb_listener_arn

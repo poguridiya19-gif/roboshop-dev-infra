@@ -6,7 +6,7 @@ resource "aws_instance" "mongodb" {
   tags                   = merge (
     local.common_tags,
     {
-        Name             = "${var.project_name}-${var.environment}-mongodb" #roboshop-dev-mongodb
+        Name             = "${local.common_name_suffix}-mongodb" #roboshop-dev-mongodb
     }
   )
 }
@@ -44,7 +44,7 @@ resource "aws_instance" "redis" {
   tags                   = merge (
     local.common_tags,
     {
-      Name               = "${var.project_name}-${var.environment}-redis" #roboshop-dev-redis
+      Name               = "${local.common_name_suffix}-redis" #roboshop-dev-redis
     }
   )  
 }
