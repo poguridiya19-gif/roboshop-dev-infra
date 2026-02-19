@@ -180,7 +180,7 @@ resource "aws_autoscaling_policy" "payment" {
 # create listener rule
 resource "aws_lb_listener_rule" "payment" {
   listener_arn = local.backend_alb_listener_arn
-  priority = 10
+  priority = 50
   action {
     type = "forward"
     target_group_arn = aws_lb_target_group.payment.arn
