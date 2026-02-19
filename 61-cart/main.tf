@@ -192,7 +192,7 @@ resource "aws_lb_listener_rule" "cart" {
   }
 }
 
-resource "terraform_data" "catalogue_local" {
+resource "terraform_data" "cart_local" {
   triggers_replace = [
     aws_instance.cart.id
   ]
