@@ -85,7 +85,7 @@ resource "aws_launch_template" "payment"{
   instance_initiated_shutdown_behavior = "terminate"
   instance_type = "t3.micro"
 
-  vpc_security_group_ids = [rt]
+  vpc_security_group_ids = [local.payment_sg_id]
 
   # when we run terraform apply again, a new version will be created with new AMI ID
   update_default_version = true
