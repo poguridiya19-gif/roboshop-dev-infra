@@ -15,23 +15,34 @@ resource "aws_lb" "backend_alb" {
   )
 }
 
-# backend ALB listening on port number 80
+# # backend ALB listening on port number 80
+# resource "aws_lb_listener" "backend_alb" {
+#   load_balancer_arn = aws_lb.backend_alb.arn
+#   port              = "80"
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type = "fixed-response"
+
+#     fixed_response {
+#       content_type = "text/plain"
+#       message_body = "DIYA NANDA"
+#       status_code  = "200"
+#     }
+#   }
+# }
+
+# Backend ALB listener on port 80
 resource "aws_lb_listener" "backend_alb" {
   load_balancer_arn = aws_lb.backend_alb.arn
-  port              = "80"
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "DIYA NANDA"
-      status_code  = "200"
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.backend_tg.arn
   }
 }
-
 resource "aws_route53_record" "backend_alb" {
   zone_id = var.zone_id
   name = "*.backend-alb-${var.environment}.${var.domain_name}"
