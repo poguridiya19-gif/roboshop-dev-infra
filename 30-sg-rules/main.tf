@@ -1,21 +1,4 @@
-resource "aws_security_group_rule" "backend_alb_bastion" { 
-  type = "ingress"
-  security_group_id = local.backend_alb_sg_id
-  source_security_group_id = local.bastion_sg_id
-  from_port         = 80
-  protocol       = "tcp"
-  to_port           = 80
-}
-
-resource "aws_security_group_rule" "bastion_laptop" { 
-  type = "ingress"
-  security_group_id = local.bastion_sg_id
-  cidr_blocks = ["0.0.0.0/0"]
-  from_port         = 22
-  protocol       = "tcp"
-  to_port           = 22
-}
-
+# mongodb sg_rules
 resource "aws_security_group_rule" "mongodb_bastion" { 
   type                     = "ingress"
   security_group_id        = local.mongodb_sg_id
@@ -43,7 +26,7 @@ resource "aws_security_group_rule" "mongodb_user" {
   to_port           = 27017
 }
 
-
+## redis sg rules ##
 # redis accepting connections from bastion on port 22
 resource "aws_security_group_rule" "redis_bastion" {
   type                     = "ingress"
@@ -71,6 +54,26 @@ resource "aws_security_group_rule" "redis_cart" {
   protocol          = "tcp"
   to_port           = 6379
 }
+
+## backend sg rules
+resource "aws_security_group_rule" "backend_alb_bastion" { 
+  type = "ingress"
+  security_group_id = local.backend_alb_sg_id
+  source_security_group_id = local.bastion_sg_id
+  from_port         = 80
+  protocol       = "tcp"
+  to_port           = 80
+}
+
+resource "aws_security_group_rule" "bastion_laptop" { 
+  type = "ingress"
+  security_group_id = local.bastion_sg_id
+  cidr_blocks = ["0.0.0.0/0"]
+  from_port         = 22
+  protocol       = "tcp"
+  to_port           = 22
+}
+
 
 resource "aws_security_group_rule" "rabbitmq_bastion" {
   type                     = "ingress"
@@ -284,4 +287,14 @@ resource "aws_security_group_rule" "backend_alb_payment" {
   from_port         = 80
   protocol          = "tcp"
   to_port           = 80
+}
+
+# vpn 
+resource "aws_security_group_rule" "open_vpn_public" {
+  type              = "ingress"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks = ["0.0.0.0/0"]
+  from_port         = 22
+  protocol          = "tcp"
+  to_port           = 22
 }
