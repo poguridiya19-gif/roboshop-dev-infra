@@ -192,7 +192,7 @@ resource "aws_lb_listener_rule" "user" {
   }
 }
 
-resource "terraform_data" "catalogue_local" {
+resource "terraform_data" "user_local" {
   triggers_replace = [
     aws_instance.user.id
   ]

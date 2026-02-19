@@ -192,7 +192,7 @@ resource "aws_lb_listener_rule" "payment" {
   }
 }
 
-resource "terraform_data" "catalogue_local" {
+resource "terraform_data" "payment_local" {
   triggers_replace = [
     aws_instance.payment.id
   ]

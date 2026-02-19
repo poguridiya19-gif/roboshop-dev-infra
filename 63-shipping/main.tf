@@ -192,7 +192,7 @@ resource "aws_lb_listener_rule" "shipping" {
   }
 }
 
-resource "terraform_data" "catalogue_local" {
+resource "terraform_data" "shipping_local" {
   triggers_replace = [
     aws_instance.shipping.id
   ]
