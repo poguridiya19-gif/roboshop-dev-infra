@@ -10,3 +10,10 @@ module "components" {
     component = each.key
     rule_priority = each.value.rule_priority
 }
+
+# module "components" {
+#   source = "./modules/components"
+
+#   for_each    = var.component
+#   use_ssh_key = each.key == "frontend"
+# }
